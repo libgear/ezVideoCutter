@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CutVideo"
         mc:Ignorable="d"
-        Title="EZ Video Cutter libgear" Height="595.677" Width="745.816" ResizeMode="NoResize" Background="White" Icon="cutvideo.ico">
-    <Grid Background="White" Margin="0,0,0,-1">
+        Title="EZ Video Cutter libgear" Height="569.677" Width="745.816" ResizeMode="NoResize" Background="White" Icon="cutvideo.ico">
+    <Grid Background="White" Margin="0,0,0,1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -31,7 +31,7 @@
         <TextBlock HorizontalAlignment="Left" x:Name="textBlock_dnd" Margin="11,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" PreviewMouseUp="TextBlock_PreviewMouseUp" AllowDrop="True" DragDrop.Drop="TextBlock_Drop" DragLeave="TextBlock_dnd_DragLeave" DragEnter="TextBlock_dnd_DragEnter" RenderTransformOrigin="0.347,0.5" Height="399" Width="710" FontSize="22"  TextAlignment="Center"><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run Text="Click here or Open File to open the video file or drag and drop"/></TextBlock>
 
         <MediaElement LoadedBehavior="Manual" MouseLeftButtonUp="MediaElement1_MouseLeftButtonUp" MediaOpened="MediaElement1_MediaOpened" x:Name="MediaElement1" HorizontalAlignment="Left" AllowDrop="True" DragDrop.Drop="MediaElement1_Drop"  Height="399" Margin="11,10,0,0" VerticalAlignment="Top" Width="713"/>
-        
+
         <TextBlock x:Name="vTime" HorizontalAlignment="Left" Margin="462,447,0,0" TextWrapping="Wrap" TextAlignment="Center" FontSize="25" Text="00:00:00 / 00:00:00" VerticalAlignment="Top" Height="31" Width="245"/>
         <TextBlock HorizontalAlignment="Left" Margin="94,449,0,0" TextWrapping="Wrap" Text="/" VerticalAlignment="Top" Width="6" RenderTransformOrigin="3.727,0.75" Height="16"/>
         <Button Content="Open File" HorizontalAlignment="Left" Margin="139,501,0,0" VerticalAlignment="Top" Width="105" Height="26" Click="Button_Click"/>
@@ -52,5 +52,6 @@
         <TextBlock HorizontalAlignment="Left" Margin="441,506,0,0" TextWrapping="Wrap" Text="Speed" VerticalAlignment="Top" TextAlignment="Right" Width="62" Height="16"/>
         <TextBlock x:Name="volumeVal" HorizontalAlignment="Left" Height="13" Margin="686,486,0,0" TextWrapping="Wrap" Text="80%" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.371,4.308"/>
         <TextBlock x:Name="SpeedMultiple" HorizontalAlignment="Left" Height="13" Margin="686,506,0,0" TextWrapping="Wrap" Text="1x" VerticalAlignment="Top" Width="35" Foreground="Black"/>
+        <Button Content="Settings" HorizontalAlignment="Left" Margin="260,501,0,0" VerticalAlignment="Top" x:Name="SettingsButto" Width="105" Height="26" Click="SettingsButto_Click"/>
     </Grid>
 </Window>

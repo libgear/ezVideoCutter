@@ -314,5 +314,10 @@ namespace CutVideo
             }
         }
 
+        private void SettingsButto_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settings = new SettingsWindow();
+            settings.Show();
+        }
     }
 }
