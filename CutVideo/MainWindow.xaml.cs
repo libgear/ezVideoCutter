@@ -9,20 +9,93 @@ using System.Diagnostics;
 
 namespace CutVideo
 {
+
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
+
+   
+
 
 
 
     public partial class MainWindow : Window
     {
+       
+
         public string pathToFile = "";
         public bool isOpen = false;
         public bool mDonSlider = false;
         bool isPlay = true;
         double cutTime1 = 0.0;
         double cutTime2 = 0.0;
+        static Brush BackGround_ON =    (Brush) (new BrushConverter().ConvertFrom("#FFD8FFD6"));
+        static Brush BackGround_ALPHA = (Brush)(new BrushConverter().ConvertFrom("#00636363"));
+        static Brush BackGround_ERROR = (Brush)(new BrushConverter().ConvertFrom("#FFFF5E5E"));
+
+        void DropEvent(DragEventArgs e) {
+            string[] dropContent = (string[])e.Data.GetData(DataFormats.FileDrop);
+            pathToFile = dropContent[0].ToString();
+            if (pathToFile.EndsWith(".mp4"))
+            {
+                isOpen = false;
+                MediaElement1.Source = new Uri(pathToFile);
+                MediaElement1.Play();
+                textBlock_dnd.Text = "";
+                textBlock_dnd.Background = BackGround_ALPHA;
+            }
+            else
+            {
+                textBlock_dnd.Text = "\n\n\n\n\n\nFile not mp4";
+                textBlock_dnd.Background = BackGround_ERROR;
+            }
+        }
+
+
+
+
+
+        void AddToContext() {
+
+            Registry.ClassesRoot.OpenSubKey("SystemFileAssociations\\.mp4", true).CreateSubKey("shell");
+            Registry.ClassesRoot.OpenSubKey("SystemFileAssociations\\.mp4\\shell", true).CreateSubKey("CutVideo").SetValue("", "Cut Video");
+            Registry.ClassesRoot.OpenSubKey("SystemFileAssociations\\.mp4\\shell\\CutVideo", true).CreateSubKey("command").SetValue("", Environment.GetCommandLineArgs()[0] + " \"%1\"");
+            Registry.ClassesRoot.OpenSubKey("SystemFileAssociations\\.mp4\\shell\\CutVideo", true).SetValue("Icon", Environment.GetCommandLineArgs()[0]);
+            if (Environment.GetCommandLineArgs().Length > 1)
+            {
+                if (Environment.GetCommandLineArgs()[1].EndsWith(".mp4")) {
+                    textBlock_dnd.Text = Environment.GetCommandLineArgs()[1].ToString();
+                    MediaElement1.Source = new Uri(Environment.GetCommandLineArgs()[1]);
+                    MediaElement1.Play();
+                    textBlock_dnd.Text = "";
+                    textBlock_dnd.Background = BackGround_ALPHA;
+                }
+                else
+                {
+                    textBlock_dnd.Background = BackGround_ERROR;
+                    textBlock_dnd.Text = "\n\n\n\n\nФайл неверного формата, нужон mp4";
+                }
+
+            }
+            /*
+                RegistryKey reg = Registry.ClassesRoot.OpenSubKey(Command);
+                if (reg != null)
+                {
+                    reg.Close();
+                    Registry.ClassesRoot.DeleteSubKey(Command);
+                }
+                reg = Registry.ClassesRoot.OpenSubKey(MenuName);
+                if (reg != null)
+                {
+                    reg.Close();
+                    Registry.ClassesRoot.DeleteSubKey(MenuName);
+                }
+            */
+
+
+        }
+
+
 
         // for set cut marker
         void markerTimeline(int pos)
@@ -35,9 +108,9 @@ namespace CutVideo
                 string h = "" + ns.Hours;
                 string m = "" + ns.Minutes;
                 string s = "" + ns.Seconds;
-                if (ns.Hours < 10) { h = "0" + h; } else { h = "" + h; }
-                if (ns.Minutes < 10) { m = "0" + m; } else { m = "" + m; }
-                if (ns.Seconds < 10) { s = "0" + s; } else { s = "" + s; }
+                if (ns.Hours < 10) { h = "0" + h; }// else { h = "" + h; }
+                if (ns.Minutes < 10) { m = "0" + m; }// else { m = "" + m; }
+                if (ns.Seconds < 10) { s = "0" + s; }// else { s = "" + s; }
                 switch (pos)
                 {
                     case 0:
@@ -61,8 +134,9 @@ namespace CutVideo
 
         public MainWindow()
         {
+           
             InitializeComponent();
-
+            AddToContext();
         }
         void openfile()
         {
@@ -71,7 +145,11 @@ namespace CutVideo
             openFileDialog.InitialDirectory = @"C:\"; //
             if (openFileDialog.ShowDialog() == true)
             {
-                pathToFile = openFileDialog.FileName;
+                textBlock_dnd.Background = BackGround_ALPHA;
+                textBlock_dnd.Text = "";
+                textBlock_dnd.IsEnabled = false;
+                
+                 var pathToFile = openFileDialog.FileName;
                 MediaElement1.Source = new Uri(openFileDialog.FileName);
                 MediaElement1.Play();
                 isOpen = false;
@@ -82,10 +160,41 @@ namespace CutVideo
         {
             openfile();
         }
+
+
         private void TextBlock_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             openfile();
         }
+
+
+        //dnd content
+
+        private void TextBlock_dnd_DragEnter(object sender, DragEventArgs e)
+        {
+            textBlock_dnd.Background = BackGround_ON;
+            textBlock_dnd.Text = "\n\n\n\n\n\nDrop file";//i dont know how it
+        }
+
+        private void TextBlock_dnd_DragLeave(object sender, DragEventArgs e)
+        {
+            textBlock_dnd.Background = BackGround_ALPHA;
+            textBlock_dnd.Text = "\n\n\n\n\n\nClick here or Open File to open the video file or drag and drop";
+        }
+
+
+        private void TextBlock_Drop(object sender, DragEventArgs e)
+        {
+            DropEvent(e);
+        }
+        private void MediaElement1_Drop(object sender, DragEventArgs e)
+        {
+            DropEvent(e);
+        }
+
+
+
+
 
         // Executed when the file is loaded
         void MediaElement1_MediaOpened(object sender, RoutedEventArgs e)
@@ -100,6 +209,10 @@ namespace CutVideo
             timelineSlider.Value = 0;
             cutTime1 = 0.0;
         }
+
+ 
+
+
         private void timer_Tick(object sender, EventArgs e)
         {
             if (isOpen)
@@ -113,12 +226,12 @@ namespace CutVideo
                 string qh = "" + ts.Hours;
                 string qm = "" + ts.Minutes;
                 string qs = "" + ts.Seconds;
-                if (ns.Hours < 10) { h = "0" + h; } else { h = "" + h; }
-                if (ns.Minutes < 10) { m = "0" + m; } else { m = "" + m; }
-                if (ns.Seconds < 10) { s = "0" + s; } else { s = "" + s; }
-                if (ts.Hours < 10) { qh = "0" + qh; } else { qh = "" + qh; }
-                if (ts.Minutes < 10) { qm = "0" + qm; } else { qm = "" + qm; }
-                if (ts.Seconds < 10) { qs = "0" + qs; } else { qs = "" + qs; }
+                if (ns.Hours < 10) { h = "0" + h; }// else { h = "" + h; }
+                if (ns.Minutes < 10) { m = "0" + m; }//// else { m = "" + m; }
+                if (ns.Seconds < 10) { s = "0" + s; }// else { s = "" + s; }
+                if (ts.Hours < 10) { qh = "0" + qh; }// else { qh = "" + qh; }
+                if (ts.Minutes < 10) { qm = "0" + qm; }// else { qm = "" + qm; }
+                if (ts.Seconds < 10) { qs = "0" + qs; }// else { qs = "" + qs; }
 
                 vTime.Text = $"{h}:{m}:{s}/{qh}:{qm}:{qs}"; //displays the time
 
@@ -157,6 +270,7 @@ namespace CutVideo
         {
             if (cutTime2 > 0)
             {
+                //MessageBox.Show(""+ cutTime2);
                 Process.Start("ffmpeg.exe", $"-ss {time1.Content}.0 -i \"{pathToFile}\" -c copy -t {Math.Floor(cutTime2)} \"{pathToFile.Replace(".mp4", PrefixSave.Text + ".mp4")}\"");
             }
             else
@@ -199,5 +313,6 @@ namespace CutVideo
                 SpeedMultiple.Text = Math.Round(SpeedSlider.Value,1) + "x";
             }
         }
+
     }
 }
