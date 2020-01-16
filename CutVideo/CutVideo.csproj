@@ -43,6 +43,17 @@
   <PropertyGroup>
     <ApplicationIcon>cutvideo.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'de|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\de\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Octane.Xamarin.Forms.VideoPlayer, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Octane.Xam.VideoPlayer.3.1.0\lib\netstandard2.0\Octane.Xamarin.Forms.VideoPlayer.dll</HintPath>

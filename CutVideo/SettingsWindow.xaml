@@ -17,13 +17,13 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button x:Name="setContextMenu" Click="setContextMenu_Click" Content="Add &quot;Cut Video&quot; in context menu" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="336"/>
-                    <Label Content="Save path" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" Width="336"/>
-                    <ComboBox x:Name="pathSelectBox" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="336" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged">
+                    <Label Content="Save path" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Width="336"/>
+                    <ComboBox x:Name="pathSelectBox" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" Width="336" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged">
                         <ComboBoxItem Content="Origin path"/>
                         <ComboBoxItem Content="Custom Path"/>
                     </ComboBox>
-                    <TextBox x:Name="textPoxPathSave" HorizontalAlignment="Left" Height="23" Margin="10,99,0,0" TextWrapping="Wrap" Text="Set custom path to edit" VerticalAlignment="Top" Width="257" IsEnabled="False" Cursor="None"/>
-                    <Button x:Name="Review_B" Click="Review_B_Click" Content="Review" HorizontalAlignment="Left" Margin="272,101,0,0" VerticalAlignment="Top" Width="74" IsEnabled="False"/>
+                    <TextBox x:Name="textPoxPathSave" HorizontalAlignment="Left" Height="23" Margin="10,86,0,0" TextWrapping="Wrap" Text="Set custom path to edit" VerticalAlignment="Top" Width="257" IsEnabled="False" Cursor="IBeam"/>
+                    <Button x:Name="Review_B" Click="Review_B_Click" Content="Review" HorizontalAlignment="Left" Margin="272,88,0,0" VerticalAlignment="Top" Width="74" IsEnabled="False"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Other">

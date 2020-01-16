@@ -142,7 +142,6 @@ namespace CutVideo
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Video files (*.mp4)|*.mp4|All files (*.*)|*.*";
-            openFileDialog.InitialDirectory = @"C:\"; //
             if (openFileDialog.ShowDialog() == true)
             {
                 textBlock_dnd.Background = BackGround_ALPHA;
@@ -268,10 +267,17 @@ namespace CutVideo
 
         private void Button_Click_1(object sender, RoutedEventArgs e) // Cut button event
         {
+            pathToFile = MediaElement1.Source.ToString().Replace("file:///","");
+            
+            string pathToSave = pathToFile.Replace(pathToFile.Split('/')[pathToFile.Split('/').Length - 1],"");
+            string fileName = pathToFile.Split('/')[pathToFile.Split('/').Length - 1];
+
+            if (Registry.CurrentUser.OpenSubKey(@"Software\\libgear\\ezVideoCutter").GetValue("Savepath").ToString() != "default")
+                pathToSave = Registry.CurrentUser.OpenSubKey(@"Software\\libgear\\ezVideoCutter").GetValue("Savepath").ToString();
+
             if (cutTime2 > 0)
             {
-                //MessageBox.Show(""+ cutTime2);
-                Process.Start("ffmpeg.exe", $"-ss {time1.Content}.0 -i \"{pathToFile}\" -c copy -t {Math.Floor(cutTime2)} \"{pathToFile.Replace(".mp4", PrefixSave.Text + ".mp4")}\"");
+                Process.Start("ffmpeg.exe", $"-ss {time1.Content}.0 -i \"{pathToFile}\" -c copy -t {Math.Floor(cutTime2)} \"{pathToSave+"/"+PrefixSave.Text+fileName}\"");
             }
             else
             {

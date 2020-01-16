@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.MessageBox;
 
 namespace CutVideo
 {
@@ -26,16 +27,27 @@ namespace CutVideo
         {
             InitializeComponent();
             if (Registry.ClassesRoot.OpenSubKey(@"SystemFileAssociations\\.mp4\\shell\\CutVideo") != null)
-            {
                 setContextMenu.Content = "Remove \"Cut Video\" in context menu";
+            else
+                setContextMenu.Content = "Add \"Cut Video\" to context menu";
+
+            
+            if (Registry.CurrentUser.OpenSubKey(@"Software\\libgear\\ezVideoCutter") != null)
+            {
+                if (Registry.CurrentUser.OpenSubKey(@"Software\\libgear\\ezVideoCutter").GetValue("Savepath", "default").ToString() == "default")
+                    pathSelectBox.SelectedIndex = 0;
+                else
+                {
+                    pathSelectBox.SelectedIndex = 1;
+                    textPoxPathSave.Text = Registry.CurrentUser.OpenSubKey(@"Software\\libgear\\ezVideoCutter").GetValue("Savepath", "default").ToString();
+                }
             }
             else
             {
-                setContextMenu.Content = "Add \"Cut Video\" to context menu";
+                pathSelectBox.SelectedIndex = 0;
             }
-                
-            
-                
+
+
 
 
         }
@@ -61,6 +73,25 @@ namespace CutVideo
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
+            if (pathSelectBox.SelectedIndex == 0)
+            {
+                Registry.CurrentUser.OpenSubKey("Software",true).CreateSubKey("libgear").CreateSubKey("ezVideoCutter").SetValue("Savepath", "default");
+            }
+            else 
+            { 
+                Uri path = new Uri(textPoxPathSave.Text);
+                if (path.Scheme != null)
+                {
+                    Registry.CurrentUser.OpenSubKey("Software", true).CreateSubKey("libgear").CreateSubKey("ezVideoCutter").SetValue("Savepath", textPoxPathSave.Text);
+                }
+                else
+                {
+                    Registry.CurrentUser.OpenSubKey("Software").CreateSubKey("libgear").CreateSubKey("ezVideoCutter").SetValue("Savepath", "default");
+                }
+            }
+            
+            
+                
             this.Close();
         }
 

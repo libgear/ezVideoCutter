@@ -1,16 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.705
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CutVideo", "CutVideo\CutVideo.csproj", "{32FD70DA-B1BB-4CC4-A3C5-2D1DD82CD332}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		de|Any CPU = de|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32FD70DA-B1BB-4CC4-A3C5-2D1DD82CD332}.de|Any CPU.ActiveCfg = de|Any CPU
+		{32FD70DA-B1BB-4CC4-A3C5-2D1DD82CD332}.de|Any CPU.Build.0 = de|Any CPU
 		{32FD70DA-B1BB-4CC4-A3C5-2D1DD82CD332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{32FD70DA-B1BB-4CC4-A3C5-2D1DD82CD332}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32FD70DA-B1BB-4CC4-A3C5-2D1DD82CD332}.Release|Any CPU.ActiveCfg = Release|Any CPU
