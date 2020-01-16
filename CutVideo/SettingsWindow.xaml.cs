@@ -23,7 +23,7 @@ namespace CutVideo
     public partial class SettingsWindow : Window
     {
         public bool isEnableContextMenu = true;
-        public SettingsWindow()
+        public SettingsWindow() 
         {
             InitializeComponent();
             if (Registry.ClassesRoot.OpenSubKey(@"SystemFileAssociations\\.mp4\\shell\\CutVideo") != null)
@@ -46,10 +46,6 @@ namespace CutVideo
             {
                 pathSelectBox.SelectedIndex = 0;
             }
-
-
-
-
         }
 
         private void setContextMenu_Click(object sender, RoutedEventArgs e)
@@ -89,9 +85,6 @@ namespace CutVideo
                     Registry.CurrentUser.OpenSubKey("Software").CreateSubKey("libgear").CreateSubKey("ezVideoCutter").SetValue("Savepath", "default");
                 }
             }
-            
-            
-                
             this.Close();
         }
 

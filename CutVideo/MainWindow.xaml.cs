@@ -9,16 +9,6 @@ using System.Diagnostics;
 
 namespace CutVideo
 {
-
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
-
-   
-
-
-
-
     public partial class MainWindow : Window
     {
        
@@ -52,9 +42,6 @@ namespace CutVideo
         }
 
 
-
-
-
         void AddToContext() {
 
             Registry.ClassesRoot.OpenSubKey("SystemFileAssociations\\.mp4", true).CreateSubKey("shell");
@@ -77,21 +64,6 @@ namespace CutVideo
                 }
 
             }
-            /*
-                RegistryKey reg = Registry.ClassesRoot.OpenSubKey(Command);
-                if (reg != null)
-                {
-                    reg.Close();
-                    Registry.ClassesRoot.DeleteSubKey(Command);
-                }
-                reg = Registry.ClassesRoot.OpenSubKey(MenuName);
-                if (reg != null)
-                {
-                    reg.Close();
-                    Registry.ClassesRoot.DeleteSubKey(MenuName);
-                }
-            */
-
 
         }
 
@@ -191,10 +163,6 @@ namespace CutVideo
             DropEvent(e);
         }
 
-
-
-
-
         // Executed when the file is loaded
         void MediaElement1_MediaOpened(object sender, RoutedEventArgs e)
         {
@@ -208,9 +176,6 @@ namespace CutVideo
             timelineSlider.Value = 0;
             cutTime1 = 0.0;
         }
-
- 
-
 
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -284,9 +249,6 @@ namespace CutVideo
                 MessageBox.Show("clip duration cannot be less than or equal to zero", "Cut error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        
-
         private void MediaElement1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) // play/pause on click vidio frame
         {
             
