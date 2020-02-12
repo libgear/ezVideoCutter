@@ -5,17 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CutVideo"
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="365.9" Width="374.749" ResizeMode="NoResize" Initialized="Window_Initialized">
+        Title="SettingsWindow" Height="360.006" Width="374.749" ResizeMode="NoResize" Initialized="Window_Initialized" Icon="cutvideo.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TabControl HorizontalAlignment="Left" Height="294" VerticalAlignment="Top" Width="362">
+        <TabControl HorizontalAlignment="Center" Height="294" VerticalAlignment="Top" Margin="0,5,0,0">
             <TabItem Header="Main">
-                <Grid Background="#FFE5E5E5" Margin="0,0,0,-1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+                <Grid Background="#FFE5E5E5" >
                     <Button x:Name="setContextMenu" Click="setContextMenu_Click" Content="Add &quot;Cut Video&quot; in context menu" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="336"/>
                     <Label Content="Save path" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Width="336"/>
                     <ComboBox x:Name="pathSelectBox" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" Width="336" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged">
@@ -27,11 +24,15 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Other">
-                <Grid Background="#FFE5E5E5" Margin="0,0,0,-1"/>
+                
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,-1">
+                    <Label Content="In DEV" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="25" VerticalAlignment="Center"/>
+                </Grid>
+
             </TabItem>
         </TabControl>
-        <Button Click="Accept_Click" Content="Accept" x:Name="Accept" HorizontalAlignment="Left" Margin="256,299,0,0" VerticalAlignment="Top" Width="96"/>
-        <Button Click="Cancle_Click" Content="Cancle" x:Name="Cancle" HorizontalAlignment="Left" Margin="10,299,0,0" VerticalAlignment="Top" Width="96"/>
+        <Button Click="Accept_Click" Content="Accept" x:Name="Accept" HorizontalAlignment="Right" Margin="0,0,7,5" VerticalAlignment="Bottom" Width="96"/>
+        <Button Click="Cancle_Click" Content="Cancle" x:Name="Cancle" HorizontalAlignment="Left" Margin="7,0,0,5" VerticalAlignment="Bottom" Width="96"/>
 
     </Grid>
 </Window>

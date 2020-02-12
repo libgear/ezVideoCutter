@@ -5,13 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CutVideo"
         mc:Ignorable="d"
-        Title="EZ Video Cutter libgear" Height="569.677" Width="745.816" ResizeMode="NoResize" Background="White" Icon="cutvideo.ico">
-    <Grid Background="White" Margin="0,0,0,1">
+        Title="EZ Video Cutter libgear" Height="566.677" Width="743.816" ResizeMode="NoResize" Background="White" Icon="cutvideo.ico">
+    <Grid Background="White" Margin="0,0,4,1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="208*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="47*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Canvas HorizontalAlignment="Left" Height="19" Margin="11,421,0,0" VerticalAlignment="Top" Width="720">
+        <Canvas HorizontalAlignment="Center" Height="19" Margin="11,5,0,0" VerticalAlignment="Center" Width="720" Grid.Row="1">
             <Line x:Name="LineClip"
      X1="5" Y1="9"
      X2="708" Y2="9"
@@ -28,30 +33,30 @@
      Stroke="Black"
      StrokeThickness="1"/>
         </Canvas>
-        <TextBlock HorizontalAlignment="Left" x:Name="textBlock_dnd" Margin="11,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" PreviewMouseUp="TextBlock_PreviewMouseUp" AllowDrop="True" DragDrop.Drop="TextBlock_Drop" DragLeave="TextBlock_dnd_DragLeave" DragEnter="TextBlock_dnd_DragEnter" RenderTransformOrigin="0.347,0.5" Height="399" Width="710" FontSize="22"  TextAlignment="Center"><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run Text="Click here or Open File to open the video file or drag and drop"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" x:Name="textBlock_dnd" Margin="14,10,0,4" TextWrapping="Wrap" VerticalAlignment="Center" PreviewMouseUp="TextBlock_PreviewMouseUp" AllowDrop="True" DragDrop.Drop="TextBlock_Drop" DragLeave="TextBlock_dnd_DragLeave" DragEnter="TextBlock_dnd_DragEnter" RenderTransformOrigin="0.347,0.5" Height="400" Width="710" FontSize="22"  TextAlignment="Center"><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run Text="Click here or Open File to open the video file or drag and drop"/></TextBlock>
 
-        <MediaElement LoadedBehavior="Manual" MouseLeftButtonUp="MediaElement1_MouseLeftButtonUp" MediaOpened="MediaElement1_MediaOpened" x:Name="MediaElement1" HorizontalAlignment="Left" AllowDrop="True" DragDrop.Drop="MediaElement1_Drop"  Height="399" Margin="11,10,0,0" VerticalAlignment="Top" Width="713"/>
+        <MediaElement LoadedBehavior="Manual" MouseLeftButtonUp="MediaElement1_MouseLeftButtonUp" MediaOpened="MediaElement1_MediaOpened" x:Name="MediaElement1" HorizontalAlignment="Center" AllowDrop="True" DragDrop.Drop="MediaElement1_Drop"   Margin="11,10,0,0" VerticalAlignment="Center"  Grid.Row="0"/>
 
-        <TextBlock x:Name="vTime" HorizontalAlignment="Left" Margin="462,447,0,0" TextWrapping="Wrap" TextAlignment="Center" FontSize="25" Text="00:00:00 / 00:00:00" VerticalAlignment="Top" Height="31" Width="245"/>
-        <TextBlock HorizontalAlignment="Left" Margin="94,449,0,0" TextWrapping="Wrap" Text="/" VerticalAlignment="Top" Width="6" RenderTransformOrigin="3.727,0.75" Height="16"/>
-        <Button Content="Open File" HorizontalAlignment="Left" Margin="139,501,0,0" VerticalAlignment="Top" Width="105" Height="26" Click="Button_Click"/>
-        <Slider PreviewMouseDown="TimelineSlider_PreviewMouseDown" PreviewMouseUp="TimelineSlider_PreviewMouseUp" x:Name="timelineSlider" HorizontalAlignment="Left" Margin="10,421,0,0" Value="0.5" VerticalAlignment="Top" Width="714" Height="18"/>
-        <Button x:Name="time1" Content="00:00:00" HorizontalAlignment="Left" Margin="17,445,0,0" VerticalAlignment="Top" Width="75" Click="Time1_Click" Height="20"/>
-        <Button x:Name="time2" Content="00:00:00" HorizontalAlignment="Left" Margin="105,445,0,0" VerticalAlignment="Top" Width="75" Click="Time2_Click" RenderTransformOrigin="0.093,0.65" Height="20"/>
-        <Button Content="Cut" HorizontalAlignment="Left" Margin="18,501,0,0" VerticalAlignment="Top" Width="105" Height="26" Click="Button_Click_1"/>
-        <TextBox x:Name="PrefixSave" HorizontalAlignment="Left" FontSize="14" Height="20" Margin="18,470,0,0" TextWrapping="Wrap" Text="(cut)" VerticalAlignment="Top" Width="162"/>
-
-
+        <TextBlock x:Name="vTime" HorizontalAlignment="Right" Margin="0,9,10,0" TextWrapping="Wrap" TextAlignment="Center" FontSize="25" Text="00:00:00 / 00:00:00" VerticalAlignment="Top" Height="31" Width="245" Grid.Row="2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="95,9,0,0" TextWrapping="Wrap" Text="/" VerticalAlignment="Top" Width="6" RenderTransformOrigin="3.727,0.75" Height="16" Grid.Row="2"/>
+        <Button Content="Open File" HorizontalAlignment="Left" Margin="139,63,0,0" VerticalAlignment="Top" Width="105" Height="26" Click="Button_Click" Grid.Row="2"/>
+        <Slider PreviewMouseDown="TimelineSlider_PreviewMouseDown" PreviewMouseUp="TimelineSlider_PreviewMouseUp" x:Name="timelineSlider" HorizontalAlignment="Center" Margin="5,5,0,0" Value="0.5" VerticalAlignment="Center" Width="714" Height="18" Grid.Row="1"/>
+        <Button x:Name="time1" Content="00:00:00" HorizontalAlignment="Left" Margin="17,7,0,0" VerticalAlignment="Top" Width="75" Click="Time1_Click" Height="20" Grid.Row="2"/>
+        <Button x:Name="time2" Content="00:00:00" HorizontalAlignment="Left" Margin="105,7,0,0" VerticalAlignment="Top" Width="75" Click="Time2_Click" RenderTransformOrigin="0.093,0.65" Height="20" Grid.Row="2"/>
+        <Button Content="Cut" HorizontalAlignment="Left" Margin="18,63,0,0" VerticalAlignment="Top" Width="105" Height="26" Click="Button_Click_1" Grid.Row="2"/>
+        <TextBox x:Name="PrefixSave" HorizontalAlignment="Left" FontSize="14" Height="20" Margin="18,32,0,0" TextWrapping="Wrap" Text="(cut)" VerticalAlignment="Top" Width="162" Grid.Row="2"/>
 
 
-        <Label Content="File name prefix" HorizontalAlignment="Left" FontSize="14" Margin="185,466,0,0" VerticalAlignment="Top" IsEnabled="False" Background="#00000000" Foreground="Black" Height="30" Width="108"/>
-        <TextBlock x:Name="clipTime" HorizontalAlignment="Left" Margin="185,440,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" Height="16"/>
-        <Slider ValueChanged="VolumeSlider_ValueChanged" x:Name="VolumeSlider" Minimum="0" Maximum="1" Value="0.8" HorizontalAlignment="Left" Margin="508,483,0,0" VerticalAlignment="Top" Width="178" Height="18"/>
-        <Slider ValueChanged="SpeedSlider_ValueChanged" x:Name="SpeedSlider" Minimum="0.2" Maximum="2" Value="1" HorizontalAlignment="Left" Margin="508,506,0,0" VerticalAlignment="Top" Width="178" Height="18"/>
-        <TextBlock HorizontalAlignment="Left" Margin="441,483,0,0" TextWrapping="Wrap" Text="Volume" VerticalAlignment="Top" TextAlignment="Right" Width="62" Height="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="441,506,0,0" TextWrapping="Wrap" Text="Speed" VerticalAlignment="Top" TextAlignment="Right" Width="62" Height="16"/>
-        <TextBlock x:Name="volumeVal" HorizontalAlignment="Left" Height="13" Margin="686,486,0,0" TextWrapping="Wrap" Text="80%" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.371,4.308"/>
-        <TextBlock x:Name="SpeedMultiple" HorizontalAlignment="Left" Height="13" Margin="686,506,0,0" TextWrapping="Wrap" Text="1x" VerticalAlignment="Top" Width="35" Foreground="Black"/>
-        <Button Content="Settings" HorizontalAlignment="Left" Margin="260,501,0,0" VerticalAlignment="Top" x:Name="SettingsButto" Width="105" Height="26" Click="SettingsButto_Click"/>
+
+
+        <Label Content="File name prefix" HorizontalAlignment="Left" FontSize="14" Margin="185,28,0,0" VerticalAlignment="Top" IsEnabled="False" Background="#00000000" Foreground="Black" Height="30" Width="108" Grid.Row="2"/>
+        <TextBlock x:Name="clipTime" HorizontalAlignment="Left" Margin="185,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" Height="16" Grid.Row="2"/>
+        <Slider ValueChanged="VolumeSlider_ValueChanged" x:Name="VolumeSlider" Minimum="0" Maximum="1" Value="0.8" HorizontalAlignment="Left" Margin="508,45,0,0" VerticalAlignment="Top" Width="178" Height="18" Grid.Row="2"/>
+        <Slider ValueChanged="SpeedSlider_ValueChanged" x:Name="SpeedSlider" Minimum="0.2" Maximum="2" Value="1" HorizontalAlignment="Left" Margin="508,68,0,0" VerticalAlignment="Top" Width="178" Height="18" Grid.Row="2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="441,45,0,0" TextWrapping="Wrap" Text="Volume" VerticalAlignment="Top" TextAlignment="Right" Width="62" Height="16" Grid.Row="2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="441,68,0,0" TextWrapping="Wrap" Text="Speed" VerticalAlignment="Top" TextAlignment="Right" Width="62" Height="16" Grid.Row="2"/>
+        <TextBlock x:Name="volumeVal" HorizontalAlignment="Left" Height="13" Margin="686,48,0,0" TextWrapping="Wrap" Text="80%" VerticalAlignment="Top" Width="35" RenderTransformOrigin="0.371,4.308" Grid.Row="2"/>
+        <TextBlock x:Name="SpeedMultiple" HorizontalAlignment="Left" Height="13" Margin="686,68,0,0" TextWrapping="Wrap" Text="1x" VerticalAlignment="Top" Width="35" Foreground="Black" Grid.Row="2"/>
+        <Button Content="Settings" HorizontalAlignment="Left" Margin="260,63,0,0" VerticalAlignment="Top" x:Name="SettingsButto" Width="105" Height="26" Click="SettingsButto_Click" Grid.Row="2"/>
     </Grid>
 </Window>

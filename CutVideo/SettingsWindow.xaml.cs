@@ -22,7 +22,7 @@ namespace CutVideo
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        public bool isEnableContextMenu = true;
+        private bool isEnableContextMenu = true;
         public SettingsWindow() 
         {
             InitializeComponent();
@@ -111,7 +111,7 @@ namespace CutVideo
                 }
             }
         }
-        public bool initwindow = false;
+        private bool initwindow = false;
         private void Window_Initialized(object sender, EventArgs e)
         {
             initwindow = true;

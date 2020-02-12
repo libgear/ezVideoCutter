@@ -11,19 +11,18 @@ namespace CutVideo
 {
     public partial class MainWindow : Window
     {
-       
+        private string pathToFile = "";
+        private bool isOpen = false;
+        private bool mDonSlider = false;
+        private bool isPlay = true;
+        private double cutTime1 = 0.0;
+        private double cutTime2 = 0.0;
 
-        public string pathToFile = "";
-        public bool isOpen = false;
-        public bool mDonSlider = false;
-        bool isPlay = true;
-        double cutTime1 = 0.0;
-        double cutTime2 = 0.0;
-        static Brush BackGround_ON =    (Brush) (new BrushConverter().ConvertFrom("#FFD8FFD6"));
-        static Brush BackGround_ALPHA = (Brush)(new BrushConverter().ConvertFrom("#00636363"));
-        static Brush BackGround_ERROR = (Brush)(new BrushConverter().ConvertFrom("#FFFF5E5E"));
+        private static Brush BackGround_ON    = (Brush) (new BrushConverter().ConvertFrom("#FFD8FFD6"));
+        private static Brush BackGround_ALPHA = (Brush)(new BrushConverter().ConvertFrom("#00636363"));
+        private static Brush BackGround_ERROR = (Brush)(new BrushConverter().ConvertFrom("#FFFF5E5E"));
 
-        void DropEvent(DragEventArgs e) {
+        private void DropEventD(DragEventArgs e) {
             string[] dropContent = (string[])e.Data.GetData(DataFormats.FileDrop);
             pathToFile = dropContent[0].ToString();
             if (pathToFile.EndsWith(".mp4"))
@@ -42,7 +41,7 @@ namespace CutVideo
         }
 
 
-        void AddToContext() {
+        private void AddToContext() {
 
             Registry.ClassesRoot.OpenSubKey("SystemFileAssociations\\.mp4", true).CreateSubKey("shell");
             Registry.ClassesRoot.OpenSubKey("SystemFileAssociations\\.mp4\\shell", true).CreateSubKey("CutVideo").SetValue("", "Cut Video");
@@ -70,7 +69,7 @@ namespace CutVideo
 
 
         // for set cut marker
-        void markerTimeline(int pos)
+        private void markerTimeline(int pos)
         {
             if (isOpen)
             {
@@ -80,9 +79,9 @@ namespace CutVideo
                 string h = "" + ns.Hours;
                 string m = "" + ns.Minutes;
                 string s = "" + ns.Seconds;
-                if (ns.Hours < 10) { h = "0" + h; }// else { h = "" + h; }
-                if (ns.Minutes < 10) { m = "0" + m; }// else { m = "" + m; }
-                if (ns.Seconds < 10) { s = "0" + s; }// else { s = "" + s; }
+                if (ns.Hours < 10) { h = "0" + h; }
+                if (ns.Minutes < 10) { m = "0" + m; }
+                if (ns.Seconds < 10) { s = "0" + s; }
                 switch (pos)
                 {
                     case 0:
@@ -110,7 +109,7 @@ namespace CutVideo
             InitializeComponent();
             AddToContext();
         }
-        void openfile()
+        private void openfile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Video files (*.mp4)|*.mp4|All files (*.*)|*.*";
@@ -156,15 +155,15 @@ namespace CutVideo
 
         private void TextBlock_Drop(object sender, DragEventArgs e)
         {
-            DropEvent(e);
+            DropEventD(e);
         }
         private void MediaElement1_Drop(object sender, DragEventArgs e)
         {
-            DropEvent(e);
+            DropEventD(e);
         }
 
         // Executed when the file is loaded
-        void MediaElement1_MediaOpened(object sender, RoutedEventArgs e)
+        private void MediaElement1_MediaOpened(object sender, RoutedEventArgs e)
         {
             isOpen = true;
             DispatcherTimer timer = new DispatcherTimer();
@@ -190,12 +189,12 @@ namespace CutVideo
                 string qh = "" + ts.Hours;
                 string qm = "" + ts.Minutes;
                 string qs = "" + ts.Seconds;
-                if (ns.Hours < 10) { h = "0" + h; }// else { h = "" + h; }
-                if (ns.Minutes < 10) { m = "0" + m; }//// else { m = "" + m; }
-                if (ns.Seconds < 10) { s = "0" + s; }// else { s = "" + s; }
-                if (ts.Hours < 10) { qh = "0" + qh; }// else { qh = "" + qh; }
-                if (ts.Minutes < 10) { qm = "0" + qm; }// else { qm = "" + qm; }
-                if (ts.Seconds < 10) { qs = "0" + qs; }// else { qs = "" + qs; }
+                if (ns.Hours < 10) { h = "0" + h; }
+                if (ns.Minutes < 10) { m = "0" + m; }
+                if (ns.Seconds < 10) { s = "0" + s; }
+                if (ts.Hours < 10) { qh = "0" + qh; }
+                if (ts.Minutes < 10) { qm = "0" + qm; }
+                if (ts.Seconds < 10) { qs = "0" + qs; }
 
                 vTime.Text = $"{h}:{m}:{s}/{qh}:{qm}:{qs}"; //displays the time
 
