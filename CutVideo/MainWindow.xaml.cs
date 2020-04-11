@@ -231,21 +231,48 @@ namespace CutVideo
 
         private void Button_Click_1(object sender, RoutedEventArgs e) // Cut button event
         {
-            pathToFile = MediaElement1.Source.ToString().Replace("file:///","");
-            
-            string pathToSave = pathToFile.Replace(pathToFile.Split('/')[pathToFile.Split('/').Length - 1],"");
-            string fileName = pathToFile.Split('/')[pathToFile.Split('/').Length - 1];
-
-            if (Registry.CurrentUser.OpenSubKey(@"Software\\libgear\\ezVideoCutter").GetValue("Savepath").ToString() != "default")
-                pathToSave = Registry.CurrentUser.OpenSubKey(@"Software\\libgear\\ezVideoCutter").GetValue("Savepath").ToString();
-
-            if (cutTime2 > 0)
+            try
             {
-                Process.Start("ffmpeg.exe", $"-ss {time1.Content}.0 -i \"{pathToFile}\" -c copy -t {Math.Floor(cutTime2)} \"{pathToSave+"/"+PrefixSave.Text+fileName}\"");
+                pathToFile = MediaElement1.Source.ToString().Replace("file:///", "");
+
+                string pathToSave = pathToFile.Replace(pathToFile.Split('/')[pathToFile.Split('/').Length - 1], "");
+                string fileName = pathToFile.Split('/')[pathToFile.Split('/').Length - 1];
+
+                if (Registry.CurrentUser.OpenSubKey(@"Software\\libgear\\ezVideoCutter").GetValue("Savepath").ToString() != "default")
+                    pathToSave = Registry.CurrentUser.OpenSubKey(@"Software\\libgear\\ezVideoCutter").GetValue("Savepath").ToString();
+
+                if (cutTime2 > 0)
+                {
+                    cut_processing.Visibility = Visibility.Visible;
+                    MediaElement1.Pause();
+                    isPlay = false;
+                    Process process = Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "cmd",
+                        Arguments = $"/C {Environment.CurrentDirectory}\\ffmpeg.exe -ss {time1.Content}.0 -i \"{pathToFile}\" -c copy -t {Math.Floor(cutTime2)} \"{pathToSave + "/" + PrefixSave.Text + fileName}\" -y",
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                        RedirectStandardOutput = true,
+                    });
+                    process.EnableRaisingEvents = true;
+                    process.Exited += (s, a) =>
+                    {
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            cut_processing.Visibility = Visibility.Hidden;
+                        });
+
+                    };
+                    //Process.Start("ffmpeg.exe", $"-ss {time1.Content}.0 -i \"{pathToFile}\" -c copy -t {Math.Floor(cutTime2)} \"{pathToSave+"/"+PrefixSave.Text+fileName}\"");
+                }
+                else
+                {
+                    MessageBox.Show("clip duration cannot be less than or equal to zero", "Cut error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("clip duration cannot be less than or equal to zero", "Cut error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No video file. Please open video file.", "Cut error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void MediaElement1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) // play/pause on click vidio frame
