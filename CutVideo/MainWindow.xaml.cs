@@ -283,11 +283,6 @@ namespace CutVideo
                 MessageBox.Show("No video file. Please open video file.", "Cut error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-            catch
-            {
-                MessageBox.Show("No video file. Please open video file.", "Cut error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
         private void MediaElement1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) // play/pause on click vidio frame
         {
             
