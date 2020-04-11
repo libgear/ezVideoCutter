@@ -246,23 +246,31 @@ namespace CutVideo
                     cut_processing.Visibility = Visibility.Visible;
                     MediaElement1.Pause();
                     isPlay = false;
-                    Process process = Process.Start(new ProcessStartInfo
+                    try
                     {
-                        FileName = "cmd",
-                        Arguments = $"/C {Environment.CurrentDirectory}\\ffmpeg.exe -ss {time1.Content}.0 -i \"{pathToFile}\" -c copy -t {Math.Floor(cutTime2)} \"{pathToSave + "/" + PrefixSave.Text + fileName}\" -y",
-                        UseShellExecute = false,
-                        CreateNoWindow = true,
-                        RedirectStandardOutput = true,
-                    });
-                    process.EnableRaisingEvents = true;
-                    process.Exited += (s, a) =>
-                    {
-                        this.Dispatcher.Invoke(() =>
+                        Process process = Process.Start(new ProcessStartInfo
                         {
-                            cut_processing.Visibility = Visibility.Hidden;
+                            FileName = $"\"{Environment.CurrentDirectory}\\ffmpeg.exe\"",
+                            Arguments = $"-ss {time1.Content}.0 -i \"{pathToFile}\" -c copy -t {Math.Floor(cutTime2)} \"{pathToSave + "/" + PrefixSave.Text + fileName}\" -y",
+                            UseShellExecute = false,
+                            CreateNoWindow = true,
+                            RedirectStandardOutput = true,
                         });
+                        process.EnableRaisingEvents = true;
+                        process.Exited += (s, a) =>
+                        {
+                            this.Dispatcher.Invoke(() =>
+                            {
+                                cut_processing.Visibility = Visibility.Hidden;
+                            });
 
-                    };
+                        };
+                    }
+                    catch
+                    {
+                        MessageBox.Show("You are missing ffmpeg.exe", "Cut error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+
                     //Process.Start("ffmpeg.exe", $"-ss {time1.Content}.0 -i \"{pathToFile}\" -c copy -t {Math.Floor(cutTime2)} \"{pathToSave+"/"+PrefixSave.Text+fileName}\"");
                 }
                 else
@@ -270,6 +278,11 @@ namespace CutVideo
                     MessageBox.Show("clip duration cannot be less than or equal to zero", "Cut error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            catch
+            {
+                MessageBox.Show("No video file. Please open video file.", "Cut error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
             catch
             {
                 MessageBox.Show("No video file. Please open video file.", "Cut error", MessageBoxButton.OK, MessageBoxImage.Error);
