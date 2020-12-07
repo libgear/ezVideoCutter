@@ -3,7 +3,7 @@
 
 For the program to work, you need to put [ffmpeg.exe](https://ffmpeg.zeranoe.com/builds/) in the same folder as the executive file.
 # Download EXE
-[EZ Video Cutter libgear.rar](http://soft.libgear.ru/EZ%20Video%20Cutter%20libgear.rar)
+[EZ Video Cutter libgear](https://github.com/libgear/ezVideoCutter/releases/tag/beta)
 # Sceenshots
 ![sceenshot1](http://shaso.libgear.ru/41_CutVideo_19-12-16_21-07-26.png)
 ![sceenshot2](http://shaso.libgear.ru/44_CutVideo_19-12-17_21-08-30.png)
